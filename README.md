@@ -5,6 +5,11 @@
  Little Go app to calculate electrical resistance given a list of colors.
  It supports 4 and 5 band schemes.
 
+ ## Installation
+
+ Clone this project to "$GOPATH/src/javierlvelasquez.com/resistor-color-code-calculator".
+ The package structure refers to javierlvelasquez.com and not github.com
+
 ## Examples
 
     ./resistor-color-code-calculator --bands White,Violet,Yellow,Black,gray
