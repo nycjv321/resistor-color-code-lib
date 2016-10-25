@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"strconv"
+	metric "javierlvelasquez.com/resistor-color-code-calculator/metric"
 )
 
 func extractMultipler(bands []Band) ([]Band, Band) {
@@ -52,7 +53,7 @@ func calculate(bands []Band) string {
 	tolerance := toleranceBand.Tolerance * 100
 	multipler := multiplerBand.Multiplier
 
-	resistance := ToMetric(float64(extractDigits(digits)) * multipler)
+	resistance := metric.ToMetric(float64(extractDigits(digits)) * multipler)
 	if tolerance == 0 {
 		return fmt.Sprintf("%v Ω", resistance)
 	} else if tolerance < 1 {
