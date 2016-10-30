@@ -3,9 +3,9 @@ package resistance
 import (
 	"bytes"
 	"fmt"
-	"strconv"
-	metric "javierlvelasquez.com/resistor-color-code-calculator/metric"
 	bands "javierlvelasquez.com/resistor-color-code-calculator/bands"
+	metric "javierlvelasquez.com/resistor-color-code-calculator/metric"
+	"strconv"
 )
 
 func extractMultipler(bnds []bands.Band) ([]bands.Band, bands.Band) {

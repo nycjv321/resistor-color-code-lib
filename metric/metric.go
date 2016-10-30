@@ -1,8 +1,8 @@
 package metric
 
 import (
-  	"math"
-    "strconv"
+	"math"
+	"strconv"
 )
 
 type MetricPrefix struct {
@@ -34,27 +34,27 @@ var metricPrefixs = []MetricPrefix{MetricPrefix{Name: "yotta", ShortScale: "sept
 	MetricPrefix{Name: "zepto", ShortScale: "sextillionth", Symbol: "z", Decimal: math.Pow(10, -21)},
 	MetricPrefix{Name: "yocto", ShortScale: "septillionth", Symbol: "y", Decimal: math.Pow(10, -24)}, MetricPrefix{}}
 
-
 var EPSILON float64 = 0.00000001
+
 func floatEquals(a, b float64) bool {
-	if ((a - b) < EPSILON && (b - a) < EPSILON) {
+	if (a-b) < EPSILON && (b-a) < EPSILON {
 		return true
 	}
 	return false
 }
 
 func FindMetricPrefixBySymbol(symbol string) MetricPrefix {
-  prefixes := metricPrefixs
-  if len(symbol) == 0 {
-    return MetricPrefix{}
-  } else {
-	   for _, prefix := range prefixes {
-      if prefix.Symbol == symbol {
-        return prefix
-      }
-    }
-    return MetricPrefix{}
-  }
+	prefixes := metricPrefixs
+	if len(symbol) == 0 {
+		return MetricPrefix{}
+	} else {
+		for _, prefix := range prefixes {
+			if prefix.Symbol == symbol {
+				return prefix
+			}
+		}
+		return MetricPrefix{}
+	}
 }
 
 func ToMetric(number float64) string {
@@ -67,8 +67,8 @@ func ToMetric(number float64) string {
 				return strconv.FormatFloat(quotient, 'f', 2, 64) + " " + prefix.Symbol
 			} else {
 				return strconv.FormatFloat(quotient, 'f', 0, 64) + " " + prefix.Symbol
+			}
 		}
-  		}
 	}
 	return ""
 }

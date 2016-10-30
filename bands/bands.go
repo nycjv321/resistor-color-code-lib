@@ -14,7 +14,6 @@ type Band struct {
 	Tolerance  float32
 }
 
-
 var bands = []Band{Band{Name: "Black", Digit: 0, Multiplier: 1},
 	Band{Name: "Brown", Digit: 1, Multiplier: 10, Tolerance: .01},
 	Band{Name: "Red", Digit: 2, Multiplier: math.Pow(10, 2), Tolerance: .02},
@@ -28,7 +27,6 @@ var bands = []Band{Band{Name: "Black", Digit: 0, Multiplier: 1},
 	Band{Name: "Gold", Multiplier: math.Pow(10, -1), Tolerance: .05},
 	Band{Name: "Silver", Multiplier: math.Pow(10, -2), Tolerance: .1},
 	Band{Tolerance: .2}}
-
 
 func FindBandByDigit(digit int) Band {
 	for _, element := range bands {
@@ -58,13 +56,13 @@ func FindBandByMultiplier(multipler float64) Band {
 }
 
 var EPSILON float64 = 0.00000001
+
 func floatEquals(a, b float64) bool {
-	if ((a - b) < EPSILON && (b - a) < EPSILON) {
+	if (a-b) < EPSILON && (b-a) < EPSILON {
 		return true
 	}
 	return false
 }
-
 
 func findBandByName(band string) Band {
 	for _, element := range bands {
