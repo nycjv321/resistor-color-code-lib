@@ -1,4 +1,4 @@
-package resistance
+package bands
 
 import (
 	"fmt"
@@ -14,6 +14,7 @@ type Band struct {
 	Tolerance  float32
 }
 
+
 var bands = []Band{Band{Name: "Black", Digit: 0, Multiplier: 1},
 	Band{Name: "Brown", Digit: 1, Multiplier: 10, Tolerance: .01},
 	Band{Name: "Red", Digit: 2, Multiplier: math.Pow(10, 2), Tolerance: .02},
@@ -28,25 +29,62 @@ var bands = []Band{Band{Name: "Black", Digit: 0, Multiplier: 1},
 	Band{Name: "Silver", Multiplier: math.Pow(10, -2), Tolerance: .1},
 	Band{Tolerance: .2}}
 
-func findBand(band string) Band {
+
+func FindBandByDigit(digit int) Band {
+	for _, element := range bands {
+		if element.Digit == digit {
+			return element
+		}
+	}
+	return Band{}
+}
+
+func FindBandByTolerance(tolerance float32) Band {
+	for _, element := range bands {
+		if element.Tolerance == tolerance {
+			return element
+		}
+	}
+	return Band{}
+}
+
+func FindBandByMultiplier(multipler float64) Band {
+	for _, element := range bands {
+		if floatEquals(element.Multiplier, multipler) {
+			return element
+		}
+	}
+	return Band{}
+}
+
+var EPSILON float64 = 0.00000001
+func floatEquals(a, b float64) bool {
+	if ((a - b) < EPSILON && (b - a) < EPSILON) {
+		return true
+	}
+	return false
+}
+
+
+func findBandByName(band string) Band {
 	for _, element := range bands {
 		if strings.EqualFold(element.Name, strings.Trim(band, " ")) {
 			return element
 		}
 	}
-	return bands[len(bands)-1]
+	return Band{}
 }
 
-func findBands(strings []string) []Band {
-	var Bands = make([]Band, len(strings), len(strings))
+func FindBandsByColors(strings []string) []Band {
+	var bds = make([]Band, len(strings), len(strings))
 	for index, element := range strings {
-		Band := findBand(element)
+		Band := findBandByName(element)
 		if Band.Name == "" {
 			fmt.Fprintf(os.Stderr, "\"%v\" was not a valid Band.\n", element)
 			os.Exit(1)
 		} else {
-			Bands[index] = Band
+			bds[index] = Band
 		}
 	}
-	return Bands
+	return bds
 }

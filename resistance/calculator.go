@@ -5,31 +5,32 @@ import (
 	"fmt"
 	"strconv"
 	metric "javierlvelasquez.com/resistor-color-code-calculator/metric"
+	bands "javierlvelasquez.com/resistor-color-code-calculator/bands"
 )
 
-func extractMultipler(bands []Band) ([]Band, Band) {
-	length := len(bands)
+func extractMultipler(bnds []bands.Band) ([]bands.Band, bands.Band) {
+	length := len(bnds)
 	if length > 2 && length < 5 {
-		multipler, digits := bands[length-1], bands[:length-1]
+		multipler, digits := bnds[length-1], bnds[:length-1]
 		return digits, multipler
 	} else {
-		return []Band{}, Band{}
+		return []bands.Band{}, bands.Band{}
 	}
 }
 
-func extractToleranceBand(bands []Band) ([]Band, Band) {
-	length := len(bands)
+func extractToleranceBand(bnds []bands.Band) ([]bands.Band, bands.Band) {
+	length := len(bnds)
 	if length > 3 && length < 6 {
-		tolerance, digits := bands[length-1], bands[:length-1]
+		tolerance, digits := bnds[length-1], bnds[:length-1]
 		return digits, tolerance
 	} else {
-		return []Band{}, Band{}
+		return []bands.Band{}, bands.Band{}
 	}
 }
 
-func extractDigits(bands []Band) int {
+func extractDigits(bnds []bands.Band) int {
 	var buffer bytes.Buffer
-	for _, element := range bands {
+	for _, element := range bnds {
 		buffer.WriteString(strconv.Itoa(element.Digit))
 	}
 	digits, error := strconv.Atoi(buffer.String())
@@ -41,13 +42,13 @@ func extractDigits(bands []Band) int {
 }
 
 func Calculate(colors []string) string {
-	return calculate(findBands(colors))
+	return calculate(bands.FindBandsByColors(colors))
 }
 
-func calculate(bands []Band) string {
+func calculate(bnds []bands.Band) string {
 
-	digits, toleranceBand := extractToleranceBand(bands)
-	var multiplerBand Band
+	digits, toleranceBand := extractToleranceBand(bnds)
+	var multiplerBand bands.Band
 	digits, multiplerBand = extractMultipler(digits)
 
 	tolerance := toleranceBand.Tolerance * 100
