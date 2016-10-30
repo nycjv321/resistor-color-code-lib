@@ -13,7 +13,7 @@ Clone this project to "$GOPATH/src/javierlvelasquez.com/resistor-color-code-calc
 
 ### Calculating bands
 
-    bds, err = parser.DetermineBands([]int{2, 7}, []int{}, "k", .01) # // returns "Red", "Violet", "Orange", "Brown" (as a list of colors)
+    bds, err = parser.DetermineBands([]int{2, 7}, []int{}, "k", .01) // returns "Red", "Violet", "Orange", "Brown" (as a list of colors)
 
 ## Example Implementation
 
