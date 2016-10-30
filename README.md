@@ -10,8 +10,8 @@ Go library to calculate resistance ± tolerance given a list of bands as well as
 
 ### Calculating bands
 
-    bds, err = DetermineBands([]int{2, 7}, []int{}, "k", .01) # // returns "Red", "Violet", "Orange", "Brown" (as a list of colors)
+    bds, err = parser.DetermineBands([]int{2, 7}, []int{}, "k", .01) # // returns "Red", "Violet", "Orange", "Brown" (as a list of colors)
 
 ## Example Implementation
 
-  See a cli implementation [here](https://github.com/nycjv321/resistor-color-code-calculator-cli)
+  See a cli implementation [here](https://github.com/nycjv321/resistor-color-code-calculator-cli).
