@@ -2,6 +2,9 @@
 
 Go library to calculate resistance ± tolerance given a list of bands as well as vice versa. 
 
+## Installation
+Clone this project to "$GOPATH/src/javierlvelasquez.com/resistor-color-code-calculator".
+
 ## Example Usage
 
 ### Calculating resistance ± tolerance
