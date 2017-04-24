@@ -17,4 +17,4 @@ Clone this project to "$GOPATH/src/javierlvelasquez.com/resistor-color-code-calc
 
 ## Example Implementation
 
-  See a cli implementation [here](https://github.com/nycjv321/resistor-color-code-calculator-cli).
+  See a cli implementation [here](https://github.com/nycjv321/resistor-color-code-calculator).
