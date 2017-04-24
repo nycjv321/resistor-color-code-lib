@@ -3,8 +3,8 @@ package resistance
 import (
 	"bytes"
 	"fmt"
-	bands "javierlvelasquez.com/resistor-color-code-calculator/bands"
-	metric "javierlvelasquez.com/resistor-color-code-calculator/metric"
+	bands "javierlvelasquez.com/resistor-color-code-lib/bands"
+	metric "javierlvelasquez.com/resistor-color-code-lib/metric"
 	"strconv"
 )
 

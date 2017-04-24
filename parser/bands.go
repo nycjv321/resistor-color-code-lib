@@ -3,8 +3,8 @@ package parser
 import (
 	"errors"
 	"fmt"
-	"javierlvelasquez.com/resistor-color-code-calculator/bands"
-	"javierlvelasquez.com/resistor-color-code-calculator/metric"
+	"javierlvelasquez.com/resistor-color-code-lib/bands"
+	"javierlvelasquez.com/resistor-color-code-lib/metric"
 	"math"
 )
 

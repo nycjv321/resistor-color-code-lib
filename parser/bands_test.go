@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"javierlvelasquez.com/resistor-color-code-calculator/bands"
+	"javierlvelasquez.com/resistor-color-code-lib/bands"
 	"testing"
 )
 
