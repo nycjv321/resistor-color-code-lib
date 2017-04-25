@@ -42,10 +42,14 @@ func extractDigits(bnds []bands.Band) int {
 }
 
 func Calculate(colors []string) string {
+	return GetResistance(colors).String()
+}
+
+func GetResistance(colors []string) *Resistance {
 	return calculate(bands.FindBandsByColors(colors))
 }
 
-func calculate(bnds []bands.Band) string {
+func calculate(bnds []bands.Band) *Resistance {
 
 	digits, toleranceBand := extractToleranceBand(bnds)
 	var multiplerBand bands.Band
@@ -55,11 +59,22 @@ func calculate(bnds []bands.Band) string {
 	multipler := multiplerBand.Multiplier
 
 	resistance := metric.ToMetric(float64(extractDigits(digits)) * multipler)
-	if tolerance == 0 {
-		return fmt.Sprintf("%v Ω", resistance)
-	} else if tolerance < 1 {
-		return fmt.Sprintf("%v Ω ± %.2f%% tolerance", resistance, tolerance)
+	return &Resistance{resistance, tolerance}
+}
+
+type Resistance struct {
+	Value     *metric.Representation
+	Tolerance float32
+}
+
+func (r *Resistance) String() string {
+	t := r.Tolerance
+	v := r.Value
+	if t == 0 {
+		return fmt.Sprintf("%v Ω", v)
+	} else if t < 1 {
+		return fmt.Sprintf("%v Ω ± %.2f%% tolerance", v, t)
 	} else {
-		return fmt.Sprintf("%v Ω ± %.f%% tolerance", resistance, tolerance)
+		return fmt.Sprintf("%v Ω ± %.f%% tolerance", v, t)
 	}
 }

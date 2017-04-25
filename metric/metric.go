@@ -57,18 +57,27 @@ func FindMetricPrefixBySymbol(symbol string) MetricPrefix {
 	}
 }
 
-func ToMetric(number float64) string {
+type Representation struct {
+	Value float64
+	Prefix MetricPrefix
+}
+
+func (r *Representation) String() string {
+	if math.Mod(r.Value, 1) > 0 {
+		return strconv.FormatFloat(r.Value, 'f', 2, 64) + " " + r.Prefix.Symbol
+	} else {
+		return strconv.FormatFloat(r.Value, 'f', 0, 64) + " " + r.Prefix.Symbol
+	}
+}
+
+func ToMetric(number float64) *Representation {
 	prefixes := metricPrefixs
 	for _, prefix := range prefixes {
 		decimal := prefix.Decimal
 		if decimal < number {
 			quotient := number / decimal
-			if math.Mod(quotient, 1) > 0 {
-				return strconv.FormatFloat(quotient, 'f', 2, 64) + " " + prefix.Symbol
-			} else {
-				return strconv.FormatFloat(quotient, 'f', 0, 64) + " " + prefix.Symbol
-			}
+			return &Representation{quotient, prefix}
 		}
 	}
-	return ""
+	return &Representation{}
 }
