@@ -6,6 +6,7 @@ import (
 	bands "javierlvelasquez.com/resistor-color-code-lib/bands"
 	metric "javierlvelasquez.com/resistor-color-code-lib/metric"
 	"strconv"
+	"encoding/json"
 )
 
 func extractMultipler(bnds []bands.Band) ([]bands.Band, bands.Band) {
@@ -65,6 +66,18 @@ func calculate(bnds []bands.Band) *Resistance {
 type Resistance struct {
 	Value     *metric.Representation
 	Tolerance float32
+}
+
+func (r *Resistance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		Value      float64  `json:"value"`
+		Prefix     string `json:"prefix"`
+		Tolerance  float32  `json:"tolerance"`
+	}{
+		Value:     r.Value.Value,
+		Prefix:    r.Value.Prefix.Symbol,
+		Tolerance: r.Tolerance,
+	})
 }
 
 func (r *Resistance) String() string {
